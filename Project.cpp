@@ -48,7 +48,7 @@ private:
     vector<Block> chain;
     int difficulty; // Difficulty for proof-of-work
 
-public:// Here is the proof of work
+public:
     Blockchain() : difficulty(0) {
         chain.emplace_back(Block(0, getCurrentTimestamp(), "Genesis Block", "0"));
     }
@@ -60,7 +60,16 @@ public:// Here is the proof of work
         chain.emplace_back(newBlock);
     }
 
-    bool verifyBlock();
+
+    Block getDataByHash(const string& hash) {
+        for (const Block& block : chain) {
+            if (block.hash == hash) {
+                return block;
+            }
+        }
+
+        return Block(-1, "", "", "");
+    }
     
     string getCurrentTimestamp() {
         time_t now = time(0);
@@ -72,6 +81,7 @@ public:// Here is the proof of work
     }
 
     void printChain() {
+        cout << "-------BLOCKCHAIN-------"<< endl;
         for (const Block& block : chain) {
             cout << "Index: " << block.index << endl;
             cout << "Timestamp: " << block.timestamp << endl;
@@ -95,6 +105,44 @@ int main() {
     }
 
     blockchain.printChain();
+
+    int option;
+    string inputHash;
+    while (true) {
+        cout << "Select an option:" << endl;
+        cout << "1. Retrieve data, index, timestamp, and hash by hash" << endl;
+        cout << "2. End" << endl;
+        cout << "Enter option: ";
+        cin >> option;
+        cin.ignore();
+        
+        switch (option) {
+            case 1: {
+                cout << "Enter the hash to retrieve data: ";
+                getline(cin, inputHash);
+
+                Block blockInfo = blockchain.getDataByHash(inputHash);
+
+                if (blockInfo.index != -1) {
+                    cout << "------RETRIEVED DATA------"<< endl;
+                    cout << "Index: " << blockInfo.index << endl;
+                    cout << "Timestamp: " << blockInfo.timestamp << endl;
+                    cout << "Data: " << blockInfo.data << endl;
+                } else {
+                    cout << "Hash not found in the blockchain." << endl;
+                }
+                break;
+            }
+            case 2: {
+                cout << "Ended..." << endl;
+                return 0;
+            }
+            default: {
+                cout << "Invalid option. Please enter a valid option." << endl;
+                break;
+            }
+        }
+    }
 
     return 0;
 }
