@@ -19,4 +19,3 @@ A blockchain-based supply chain tracking system utilizes blockchain technology t
 
 **Compliance and Auditing:**
 - Blockchain-based supply chain systems facilitate easier compliance with regulations and standards. Auditors can access the immutable records on the blockchain to verify compliance at each stage of the supply chain.
-
