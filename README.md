@@ -19,3 +19,10 @@ A blockchain-based supply chain tracking system utilizes blockchain technology t
 
 **Compliance and Auditing:**
 - Blockchain-based supply chain systems facilitate easier compliance with regulations and standards. Auditors can access the immutable records on the blockchain to verify compliance at each stage of the supply chain.
+
+## PicoSHA2
+- We use picoSHA2 library to perform SHA-256 hashing in the project.
+- SHA-256 is a cryptographic hash function that produces a fixed-size (256-bit or 32-byte) hash value from input data of arbitrary size.
+
+## output of a example
+  ![image](https://github.com/Mragankk/Blockchain_based_Supplychain_tracking_system/assets/145200189/d67e2529-8c4f-41fe-9f87-2da1bb0a9ee7)
