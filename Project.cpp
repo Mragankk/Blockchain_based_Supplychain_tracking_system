@@ -7,7 +7,6 @@
 
 using namespace std;
 
-
 std::string sha256(const std::string& src) {
     std::vector<unsigned char> hash(picosha2::k_digest_size);
     picosha2::hash256(src.begin(), src.end(), hash.begin(), hash.end());
@@ -16,44 +15,53 @@ std::string sha256(const std::string& src) {
     return hex_hash;
 }
 
-
 struct Block {
     int index;
     string timestamp;
     string data;
     string previousHash;
     string hash;
+    unsigned int nonce; // Nonce for proof-of-work
 
-    
     Block(int idx, const string& ts, const string& d, const string& prevHash) : 
-        index(idx), timestamp(ts), data(d), previousHash(prevHash) {
+        index(idx), timestamp(ts), data(d), previousHash(prevHash), nonce(0) {
             hash = calculateHash();
         }
 
     string calculateHash() {
-        string input = to_string(index) + timestamp + data + previousHash;
+        string input = to_string(index) + timestamp + data + previousHash + to_string(nonce);
         return sha256(input);
     }
-};
 
+    // Proof-of-work mining
+    void mineBlock(int difficulty) {
+        string prefix(difficulty, '0');
+        while (hash.substr(0, difficulty) != prefix) {
+            nonce++;
+            hash = calculateHash();
+        }
+    }
+};
 
 class Blockchain {
 private:
     vector<Block> chain;
+    int difficulty; // Difficulty for proof-of-work
 
-public:
-
-    Blockchain() {
+public:// Here is the proof of work
+    Blockchain() : difficulty(0) {
         chain.emplace_back(Block(0, getCurrentTimestamp(), "Genesis Block", "0"));
     }
 
-
     void addBlock(const string& data) {
         const Block& lastBlock = chain.back();
-        chain.emplace_back(Block(lastBlock.index + 1, getCurrentTimestamp(), data, lastBlock.hash));
+        Block newBlock(lastBlock.index + 1, getCurrentTimestamp(), data, lastBlock.hash);
+        newBlock.mineBlock(difficulty);
+        chain.emplace_back(newBlock);
     }
 
-
+    bool verifyBlock();
+    
     string getCurrentTimestamp() {
         time_t now = time(0);
         struct tm tstruct;
@@ -62,7 +70,6 @@ public:
         strftime(buf, sizeof(buf), "%Y-%m-%d %X", &tstruct);
         return buf;
     }
-
 
     void printChain() {
         for (const Block& block : chain) {
@@ -75,9 +82,7 @@ public:
     }
 };
 
-
 int main() {
-
     Blockchain blockchain;
 
     string product;
