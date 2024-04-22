@@ -24,6 +24,14 @@ A blockchain-based supply chain tracking system utilizes blockchain technology t
 - We use picoSHA2 library to perform SHA-256 hashing in the project.
 - SHA-256 is a cryptographic hash function that produces a fixed-size (256-bit or 32-byte) hash value from input data of arbitrary size.
 
+## Pre-requisites:
+
+```
+gcc (mingw-32 for windows)
+picosha2
+
+```
+
 ## output of a example
 
   ![image](https://github.com/Mragankk/Blockchain_based_Supplychain_tracking_system/assets/145200189/a5a60273-975d-4fe0-b392-0dc51f61907c)
