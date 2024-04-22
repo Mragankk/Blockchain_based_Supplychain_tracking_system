@@ -110,7 +110,7 @@ int main() {
     string inputHash;
     while (true) {
         cout << "Select an option:" << endl;
-        cout << "1. Retrieve data, index, timestamp, and hash by hash" << endl;
+        cout << "1. Retrieve data, index, timestamp" << endl;
         cout << "2. End" << endl;
         cout << "Enter option: ";
         cin >> option;
