@@ -45,9 +45,10 @@ picosha2
    - also include a method `mineblock()` to perform proof of work
 - `Blockchain`:
    - it represents the blockchain, which is a collection of blocks.
-   - it contains a vector of Block objects to store the blocks.
+   - initializes a new blockchain instance with a single genesis block, serving as the initial block in the chain
+   - it contains a vector `chain` of Block objects to store the blocks
    - it includes methods to add new blocks to the blockchain `addBlock()`, get the current timestamp `getCurrentTimestamp()`, retrieve block data by hash `getDataByHash()`, and print the entire blockchain `printChain()`.
-
+      
 ## Functions
 - `sha256(const std::string& sr)`: computes the SHA-256 hash of the provided string (src) and returns the hexadecimal representation of the hash
 - `calculateHash()`: calculates the hash of the block's data by concatenating the block's index, timestamp, data, previous hash, and nonce into a single string and passes it to the sha256() function and returns the hash of the block.
