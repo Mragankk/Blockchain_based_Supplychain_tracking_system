@@ -20,19 +20,43 @@ A blockchain-based supply chain tracking system utilizes blockchain technology t
 **Compliance and Auditing:**
 - Blockchain-based supply chain systems facilitate easier compliance with regulations and standards. Auditors can access the immutable records on the blockchain to verify compliance at each stage of the supply chain.
 
-## PicoSHA2
-- We use picoSHA2 library to perform SHA-256 hashing in the project.
-- SHA-256 is a cryptographic hash function that produces a fixed-size (256-bit or 32-byte) hash value from input data of arbitrary size.
-
 ## Pre-requisites:
 
 ```
 gcc (mingw-32 for windows)
 picosha2
-
 ```
 
-## output of a example
+## PicoSHA2
+- We use picoSHA2 library to perform SHA-256 hashing in the project.
+- SHA-256 is a cryptographic hash function that produces a fixed-size (256-bit or 32-byte) hash value from input data of arbitrary size.
+- Reason to use PicoSHA2 - It provides a simple and efficient way to compute hash values in C++ programs without dependencies on external libraries.
+- Functions used in the project from PicoSHA2 library:
+  -  `sha256()` : uses Picosha2 to calculate the SHA-256 hash of a given input string
+  -  `hash256()` : to compute the hash
+  -  `bytes_to_hex_string()`: converts the resulting hash into a hexadecimal string representation
+  -   In the `Block` struct, the `calculateHash()` method is used to compute the hash of the block's data, including the index, timestamp, data, previous hash, and nonce and this method internally calls `sha256()` function 
+ 
+ ## Classes
+- `Block`:
+   - it represents a single block in the blockchain.
+   - contains member variables to store the block's index, timestamp, data, previous hash, current hash, and a nonce (used for proof-of-work).
+   - it has a method `calculateHash()` to compute the hash of the block's data.
+   - also include a method `mineblock()` to perform proof of work
+- `Blockchain`:
+   - it represents the blockchain, which is a collection of blocks.
+   - it contains a vector of Block objects to store the blocks.
+   - it includes methods to add new blocks to the blockchain `addBlock()`, get the current timestamp `getCurrentTimestamp()`, retrieve block data by hash `getDataByHash()`, and print the entire blockchain `printChain()`.
+
+## Functions
+- `sha256(const std::string& sr)`: computes the SHA-256 hash of the provided string (src) and returns the hexadecimal representation of the hash
+- `calculateHash()`: calculates the hash of the block's data by concatenating the block's index, timestamp, data, previous hash, and nonce into a single string and passes it to the sha256() function and returns the hash of the block.
+- `addBlock()`: adds a new block to the blockchain with the provided data also retrieves the previous block's hash and constructs a new block with incremented index, current timestamp, provided data, and previous hash,pPerforms proof-of-work mining for the new block.
+- `getDataByHash()`: retrieves block data by the hash value by searching the blockchain for the block with the specified hash. Returns the block if found, otherwise returns a default block.
+- `getCurrentTimestamp()`: Gets the current system timestamp in the format YYYY-MM-DD HH:MM:SS
+- `printChain()`: Prints the entire blockchain, including index, timestamp, data, previous hash, and hash of each block.
+
+## Output of a example
 
   ![image](https://github.com/Mragankk/Blockchain_based_Supplychain_tracking_system/assets/145200189/a5a60273-975d-4fe0-b392-0dc51f61907c)
 
