@@ -1,4 +1,3 @@
-#include <iostream> 
 #include <vector>
 #include <ctime>
 #include <string>
@@ -21,9 +20,9 @@ struct Block {
     string data;
     string previousHash;
     string hash;
-    unsigned int nonce; // Nonce for proof-of-work
+    unsigned int nonce;
 
-    Block(int idx, const string& ts, const string& d, const string& prevHash) : 
+    Block(int idx, const string& ts, const string& d, const string& prevHash) :
         index(idx), timestamp(ts), data(d), previousHash(prevHash), nonce(0) {
             hash = calculateHash();
         }
@@ -33,7 +32,6 @@ struct Block {
         return sha256(input);
     }
 
-    // Proof-of-work mining
     void mineBlock(int difficulty) {
         string prefix(difficulty, '0');
         while (hash.substr(0, difficulty) != prefix) {
@@ -46,7 +44,7 @@ struct Block {
 class Blockchain {
 private:
     vector<Block> chain;
-    int difficulty; // Difficulty for proof-of-work
+    int difficulty;
 
 public:
     Blockchain() : difficulty(0) {
@@ -59,7 +57,6 @@ public:
         newBlock.mineBlock(difficulty);
         chain.emplace_back(newBlock);
     }
-
 
     Block getDataByHash(const string& hash) {
         for (const Block& block : chain) {
@@ -135,6 +132,7 @@ int main() {
             }
             case 2: {
                 cout << "Ended..." << endl;
+                system("pause");
                 return 0;
             }
             default: {
