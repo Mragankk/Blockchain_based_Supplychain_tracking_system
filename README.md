@@ -57,6 +57,9 @@ picosha2
 - `getCurrentTimestamp()`: Gets the current system timestamp in the format YYYY-MM-DD HH:MM:SS
 - `printChain()`: Prints the entire blockchain, including index, timestamp, data, previous hash, and hash of each block.
 
+## GRAPH
+![project diagram-Page-1 (1)](https://github.com/Mragankk/Blockchain_based_Supplychain_tracking_system/assets/145200189/6dbb759b-a796-4020-9e71-82e235c0e628)
+
 ## Output of a example
 
   ![image](https://github.com/Mragankk/Blockchain_based_Supplychain_tracking_system/assets/145200189/a5a60273-975d-4fe0-b392-0dc51f61907c)
